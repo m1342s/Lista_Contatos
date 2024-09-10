@@ -37,9 +37,17 @@ export const contatoSlice = createSlice({
     remover: (state, action: PayloadAction<number>) => {
       state.itens = state.itens.filter((contato) => contato.id !== action.payload);
     },
+    cadastrar:(state,action:PayloadAction<Contato>)=>{
+      const existeContato=state.itens.find(contato=>contato.nome===action.payload.nome.toLowerCase())
+      if (existeContato) {
+        alert("contato já adicionado!")
+      }else{
+        state.itens.push(action.payload)
+      }
+    }
   },
 });
 
-export const {remover}=contatoSlice.actions
+export const {remover,cadastrar}=contatoSlice.actions
 
 export default contatoSlice.reducer

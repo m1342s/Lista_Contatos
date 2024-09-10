@@ -5,31 +5,21 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { remover } from "../../store/reducers/contatos";
 import { Contato } from "../../models/Contato";
+import { DivLabelInput,Label,Input } from "../../styles";
 
 type Props = Contato;
 export const ContatoCard = ({
-  nome: nomeOriginal,
-  telefone: telefoneOriginal,
-  email: emailOriginal,
+  nome,
+  telefone,
+  email,
   id,
 }: Props) => {
   const [editando, setEditando] = useState(false);
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
-  const [nome, setNome] = useState("");
+  const [telefoneState, setTelefone] = useState("");
+  const [emailState, setEmail] = useState("");
+  const [nomeState, setNome] = useState("");
 
-  useEffect(() => {
-    if (nomeOriginal.length > 0) {
-      setNome(nomeOriginal);
-    }
-    if (telefoneOriginal.length > 0) {
-      setTelefone(telefoneOriginal);
-    }
-    if (emailOriginal.length > 0) {
-      setEmail(emailOriginal);
-    }
-  }, [nomeOriginal,emailOriginal,telefoneOriginal]);
-
+  
   
   const dispatch = useDispatch();
   return (
@@ -37,33 +27,33 @@ export const ContatoCard = ({
       <S.Card>
         <S.DivFotoNome>
           <S.Foto src={image}></S.Foto>
-          <S.DivLabelInput>
-            <S.Label>Nome do contato:</S.Label>
-            <S.Input
+          <DivLabelInput>
+            <Label>Nome do contato:</Label>
+            <Input
             disabled={!setEditando}
               
-              value={nomeOriginal}
+              value={nome}
               onChange={(evento) => setNome(evento.target.value)}
             />
-          </S.DivLabelInput>
+          </DivLabelInput>
         </S.DivFotoNome>
         <S.DivEmailTel>
-          <S.DivLabelInput>
-            <S.Label>Email do contato:</S.Label>
-            <S.Input
+          <DivLabelInput>
+            <Label>Email do contato:</Label>
+            <Input
             disabled={!setEditando}
               
-              value={emailOriginal}
+              value={email}
               onChange={(evento) => setEmail(evento.target.value)}
             />
-            <S.Label>Telefone do Contato:</S.Label>
-            <S.Input
+            <Label>Telefone do Contato:</Label>
+            <Input
             disabled={!setEditando}
               
-              value={telefoneOriginal}
+              value={telefone}
               onChange={(evento) => setTelefone(evento.target.value)}
             />
-          </S.DivLabelInput>
+          </DivLabelInput>
         </S.DivEmailTel>
         <S.DivBotoes>
           {editando ? (

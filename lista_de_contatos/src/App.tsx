@@ -1,18 +1,32 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Provider } from "react-redux";
-import { ListaDeContatos } from "./Components/ListaDeContatos";
 import GlobalStyle from "./styles";
-import {store} from "./store/index"
+import { store } from "./store/index";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Home } from "./pages/Home";
+import  NovoContato  from "./pages/NovoContato";
+
+const rotas = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <Home/>
+    )
+  },
+  {
+    path:'/novo',
+    element:<NovoContato/>
+  }
+]);
 
 function App() {
   return (
     <>
-    <Provider store={store}>
-      <GlobalStyle/>
-      <h1 style={{textAlign:"center", margin:"30px"}}>Lista de Contatos</h1>
-      <ListaDeContatos/>
+      <Provider store={store}>
+        <GlobalStyle />
+        <RouterProvider router={rotas}/>
       </Provider>
     </>
-  
   );
 }
 
